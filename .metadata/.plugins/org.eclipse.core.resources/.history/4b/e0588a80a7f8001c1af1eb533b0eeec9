@@ -1,0 +1,155 @@
+package backend;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.Test;
+import org.testng.ITestListener ;
+import pageobject.workbookread;
+import org.testng.annotations.Test;
+import org.testng.ITestContext ;		
+import org.testng.ITestListener ;		
+import org.testng.ITestResult ;
+//This class will take screenshot whenever the testcases will get failed
+public class screenshot implements ITestListener {
+	
+	public static WebDriver driver;
+	
+	public static  void intialisation() {
+		
+		
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Abhilasha\\Documents\\chromedriver//chromedriver.exe");  
+		// Create driver object for CHROME browser  
+		driver = new ChromeDriver();  
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);  
+		driver.manage().window().maximize();  
+		driver.get("https://www.javatpoint.com");  
+		// get the current URL of the page  
+		String URL= driver.getCurrentUrl();  
+		System.out.print(URL);  
+	}
+	
+	public void failedTestcases() {
+		
+		//File filefail=((TakesScreenshot).driver).getScreenShotAs(OutputType.FILE);
+	}
+	
+	public void TakeScreenShotfail() throws Exception{
+        TakesScreenshot scrShot =((TakesScreenshot)driver);
+        File SrcFile=scrShot.getScreenshotAs(OutputType.FILE);
+        System.out.println("in takes screenshot method...before");
+        File DestFile=new File("C:\\Users\\Abhilasha\\eclipse-workspace\\framework"+"\\screenshottaken\\testfailure.jpg");
+        FileUtils.copyFile(SrcFile,DestFile);
+        System.out.println("in takes screenshot method...after");
+	
+
+}
+
+	@Override
+	public void onTestStart(ITestResult result) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onTestSuccess(ITestResult result) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onTestFailure(ITestResult result) {
+		// TODO Auto-generated method stub
+		
+		System.out.println("Test case failed...taking screenshot...");
+		try {
+			System.out.println("Test case failed...taking screenshot..inside the try catch...checking...");
+			
+			TakeScreenShotfail();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public void onTestSkipped(ITestResult result) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onStart(ITestContext context) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onFinish(ITestContext context) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+	public void mainclick(String uservalue) {
+		
+		 workbookread ob=new workbookread();
+		 //String ele=ob.readataTest("Signin");
+		System.out.println("First method..and reading data from excel");
+		//WebElement email = driver.findElement(By.xpath(ob.readataTest("Signin")));
+		System.out.println("array list is declared");
+		 List<String> list2=new ArrayList<String>();
+		 try {
+			 System.out.println("Reading the data from excel...scanning....");
+			list2=ob.readataTest(uservalue);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 for(String fruit:list2)  
+			  System.out.println("checking if value is printed====="+fruit);
+		 
+		 String s1="xpath";
+		 System.out.println("checking if value fetched is xpath or css===="+list2.get(0));
+		 if(s1.equalsIgnoreCase(list2.get(0)))
+		 {
+			 System.out.println("after compare statement........++++++++++++");
+			 buttonclick(list2.get(1));
+		 }
+		 
+		 else {
+			 System.out.println("after compare statement........ css*****");
+			 buttonclickcss(list2.get(1));
+			 
+		 }
+		
+	}
+	public void buttonclick(String var) {
+		
+		WebElement email = driver.findElement(By.xpath(var));
+		email.click();
+		
+	}
+	
+	public void buttonclickcss(String var)
+	{
+		WebElement email = driver.findElement(By.cssSelector(var));
+		//WebElement email = driver.findElement(By.xpath(var));
+		email.click();
+	}
+}

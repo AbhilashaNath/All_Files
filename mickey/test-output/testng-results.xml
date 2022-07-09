@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results total="1" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2022-06-18T19:09:22Z" name="Default suite" finished-at="2022-06-18T19:09:22Z" duration-ms="491">
+    <groups>
+    </groups>
+    <test started-at="2022-06-18T19:09:22Z" name="Default test" finished-at="2022-06-18T19:09:22Z" duration-ms="491">
+      <class name="readdata.workbookread">
+        <test-method signature="readataTest()[pri:0, instance:readdata.workbookread@42a15bdc]" started-at="2022-06-19T00:39:22Z" name="readataTest" finished-at="2022-06-19T00:39:22Z" duration-ms="478" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- readataTest -->
+      </class> <!-- readdata.workbookread -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

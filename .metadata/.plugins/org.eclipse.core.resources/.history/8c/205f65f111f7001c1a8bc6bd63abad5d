@@ -1,0 +1,89 @@
+package backend;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.Test;
+import org.testng.ITestListener ;
+import pageobject.workbookread;
+import org.testng.annotations.Test;
+import org.testng.ITestContext ;		
+import org.testng.ITestListener ;		
+import org.testng.ITestResult ;
+//This class will take screenshot whenever the testcases will get failed
+public class screenshot implements ITestListener {
+	
+	public static WebDriver driver;
+	public void failedTestcases() {
+		
+		//File filefail=((TakesScreenshot).driver).getScreenShotAs(OutputType.FILE);
+	}
+	
+	public void TakeScreenShotfail() throws Exception{
+        TakesScreenshot scrShot =((TakesScreenshot)driver);
+        File SrcFile=scrShot.getScreenshotAs(OutputType.FILE);
+        
+        File DestFile=new File("C:\\Users\\Abhilasha\\eclipse-workspace\\framework"+"\\screenshottaken\\testfailure.jpg");
+        FileUtils.copyFile(SrcFile,DestFile);
+	
+
+}
+
+	@Override
+	public void onTestStart(ITestResult result) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onTestSuccess(ITestResult result) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onTestFailure(ITestResult result) {
+		// TODO Auto-generated method stub
+		
+		System.out.println("Test case failed...taking screenshot...");
+		try {
+			TakeScreenShotfail();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public void onTestSkipped(ITestResult result) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onStart(ITestContext context) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onFinish(ITestContext context) {
+		// TODO Auto-generated method stub
+		
+	}
+}
